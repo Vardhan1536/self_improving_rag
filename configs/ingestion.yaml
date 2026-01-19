@@ -1,0 +1,11 @@
+fixed:
+  chunk_size: 200
+  overlap: 50
+
+section:
+  chunk_size: 300
+  overlap: 50
+
+semantic:
+  chunk_size: 250
+  overlap: 0

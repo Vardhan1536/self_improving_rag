@@ -1,0 +1,105 @@
+[
+  {
+    "chunk_id": "7554c70b-bba8-4d78-ac60-662c48f6c539",
+    "text": "# Introduction Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with large language models. It allows models to ground their answers in external documents. # Chunking Problems Bad chunking is the number one reason RAG systems fail in production. If chunks are too small, context is lost. If chunks are too large, retrieval becomes noisy. # Industry Perspective In real-world systems, chunking strategies are tuned per document type. Self-improving RAG systems must detect chunking failures automatically.",
+    "source_doc": "docs/sample.txt",
+    "section": "N/A",
+    "strategy": "fixed",
+    "token_count": 78,
+    "metadata": {
+      "chunk_index": 0,
+      "start_token": 0,
+      "end_token": 200
+    }
+  },
+  {
+    "chunk_id": "267037f9-87c8-4ba8-923c-9d00175f2239",
+    "text": "# Introduction",
+    "source_doc": "docs/sample.txt",
+    "section": "section_0",
+    "strategy": "section",
+    "token_count": 2,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "9c3c264e-f1d6-49a0-91c0-dabe4a805f45",
+    "text": "Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with large language models.",
+    "source_doc": "docs/sample.txt",
+    "section": "section_1",
+    "strategy": "section",
+    "token_count": 14,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "59db3df7-12d3-41d2-acdb-58dd8aaa776b",
+    "text": "It allows models to ground their answers in external documents.",
+    "source_doc": "docs/sample.txt",
+    "section": "section_2",
+    "strategy": "section",
+    "token_count": 10,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "bc92942d-dbac-49a1-805f-219371a0d37e",
+    "text": "# Chunking Problems",
+    "source_doc": "docs/sample.txt",
+    "section": "section_3",
+    "strategy": "section",
+    "token_count": 3,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "e01255b5-11b4-488c-8bbd-7bf2bd924c9a",
+    "text": "Bad chunking is the number one reason RAG systems fail in production.",
+    "source_doc": "docs/sample.txt",
+    "section": "section_4",
+    "strategy": "section",
+    "token_count": 12,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "14c1d001-459c-4807-933b-7eacd122423d",
+    "text": "If chunks are too small, context is lost.\nIf chunks are too large, retrieval becomes noisy.",
+    "source_doc": "docs/sample.txt",
+    "section": "section_5",
+    "strategy": "section",
+    "token_count": 16,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "63590e1d-1f50-449a-8f98-374d32c4af5e",
+    "text": "# Industry Perspective",
+    "source_doc": "docs/sample.txt",
+    "section": "section_6",
+    "strategy": "section",
+    "token_count": 3,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "00878d2a-1683-4ecf-9e99-bbaf6080e044",
+    "text": "In real-world systems, chunking strategies are tuned per document type.",
+    "source_doc": "docs/sample.txt",
+    "section": "section_7",
+    "strategy": "section",
+    "token_count": 10,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "4f705c9a-fe0b-4206-9cef-77cf1da4a2e0",
+    "text": "Self-improving RAG systems must detect chunking failures automatically.",
+    "source_doc": "docs/sample.txt",
+    "section": "section_8",
+    "strategy": "section",
+    "token_count": 8,
+    "metadata": {}
+  },
+  {
+    "chunk_id": "31513bed-a08d-4b61-9fc6-cd575bbac349",
+    "text": "# Introduction Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with large language models. It allows models to ground their answers in external documents. # Chunking Problems Bad chunking is the number one reason RAG systems fail in production. If chunks are too small, context is lost. If chunks are too large, retrieval becomes noisy. # Industry Perspective In real-world systems, chunking strategies are tuned per document type. Self-improving RAG systems must detect chunking failures automatically.",
+    "source_doc": "docs/sample.txt",
+    "section": "semantic",
+    "strategy": "semantic",
+    "token_count": 78,
+    "metadata": {}
+  }
+]

@@ -1,0 +1,62 @@
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+
+# ============================
+# Virtual Environments
+# ============================
+venv/
+.env/
+.env.local
+
+# ============================
+# Hugging Face / LLM artifacts
+# ============================
+.cache/
+hf_cache/
+huggingface/
+models/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+
+# ============================
+# Tokenizers / Downloads
+# ============================
+tokenizer.json
+tokenizer.model
+
+# ============================
+# Experiment outputs
+# ============================
+outputs/
+runs/
+wandb/
+logs/
+
+# ============================
+# OS / Editor junk
+# ============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================
+# VS Code / IDE
+# ============================
+.vscode/
+.idea/
+
+# ============================
+# Temporary files
+# ============================
+*.tmp
+*.swp
+*.bak

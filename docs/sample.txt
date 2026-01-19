@@ -1,0 +1,18 @@
+# Introduction
+
+Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with large language models.
+
+It allows models to ground their answers in external documents.
+
+# Chunking Problems
+
+Bad chunking is the number one reason RAG systems fail in production.
+
+If chunks are too small, context is lost.
+If chunks are too large, retrieval becomes noisy.
+
+# Industry Perspective
+
+In real-world systems, chunking strategies are tuned per document type.
+
+Self-improving RAG systems must detect chunking failures automatically.
