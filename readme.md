@@ -261,9 +261,7 @@ Whether the retrieval step provided **usable, non-trivial evidence**.
 
 Grounding separates:
 
-* *retrieval failure*
-  from
-* *generation failure*
+* *retrieval failure* from *generation failure*
 
 ---
 
@@ -337,6 +335,29 @@ Each metric captures a **different failure mode**:
 
 No single metric is trusted alone.
 Decisions are made **systemically**, not heuristically.
+
+### Refusal vs Confidence (Important Distinction)
+
+In this system, **confidence measures trustworthiness of the response**, not whether the response contains factual content.
+
+During retry, it is possible for:
+- confidence to increase
+- while the correct response remains an explicit refusal
+
+This occurs when:
+- retrieval quality improves
+- faithfulness increases
+- grounding improves
+- but the corpus still lacks the required information
+
+In such cases, the system becomes **more confident that refusal is the correct outcome**.
+
+This behavior exposed a policy-level distinction between:
+- *answer confidence*
+- *answerability*
+
+Future iterations introduce explicit refusal detection based on semantic cues (e.g., “insufficient information”) to align numeric confidence with refusal intent.
+
 
 ## ⚙️ Performance & Deployment Notes
 
