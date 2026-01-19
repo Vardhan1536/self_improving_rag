@@ -1,6 +1,8 @@
 from feedback.failure_classifier import classify_failure
 from feedback.retry_policy import retry_strategy
 from memory.schemas import MemoryRecord
+from evaluation.answer_type import AnswerType
+
 
 class SelfImprovingController:
     def __init__(self, memory_store):
@@ -11,12 +13,14 @@ class SelfImprovingController:
         query,
         retrieval_report,
         faithfulness,
-        confidence
+        confidence,
+        answer_type: AnswerType
     ):
         failure = classify_failure(
-            retrieval_report,
-            faithfulness,
-            confidence
+            retrieval_report=retrieval_report,
+            faithfulness=faithfulness,
+            confidence=confidence,
+            answer_type=answer_type
         )
 
         if failure == "no_failure":

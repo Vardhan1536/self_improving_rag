@@ -61,7 +61,9 @@ Instead of optimizing for “accuracy”, it optimizes for:
 
 ### ✅ Refusal & Safety Logic
 
-* Explicit refusal when confidence is low
+* Explicit distinction between **answer intent** (answer vs refusal) and **confidence**
+* Refusal triggered by **semantic insufficiency**, not just low confidence
+* Confidence measures trust in the chosen response (including refusal)
 * Avoids hallucination instead of masking it
 
 ### 🚀 Self-Improving Feedback Loop
@@ -110,10 +112,10 @@ How does bad chunking affect gradient flow in transformer attention layers?
 
 * Retrieval finds chunking-related context
 * Coverage is low (no mention of gradients or attention math)
-* Faithfulness drops
-* Confidence falls below threshold
-* **System refuses instead of hallucinating**
-* Retry attempts improve retrieval but still refuse if unsupported
+* System determines the question is **unanswerable from the corpus**
+* Answer type is classified as **refusal**
+* Retry improves retrieval quality but does not introduce new information
+* Confidence increases, indicating higher trust in the refusal
 * Failure and retry outcome are stored in memory
 
 > Refusal is treated as a **successful outcome**, not a failure.
@@ -281,11 +283,12 @@ A weighted combination of:
 
 ### What it means
 
-| Confidence | System Action  |
-| ---------- | -------------- |
-| High       | Answer         |
-| Borderline | Retry strategy |
-| Low        | Refuse         |
+| Confidence | Interpretation                                     |
+| ---------- | -------------------------------------------------- |
+| High       | High trust in the chosen response (answer/refusal) |
+| Medium     | Retry may improve certainty                        |
+| Low        | System is unsure of its own decision               |
+
 
 ### Why it exists
 
@@ -297,28 +300,30 @@ Production systems must:
 
 ---
 
-## 7️⃣ Refusal Signal (Safety Outcome)
+## 7️⃣ Answer Type (Answer vs Refusal)
 
 ### What it measures
 
-Whether the system should **explicitly refuse** to answer.
+Whether the system’s response is an **answer** or an explicit **refusal**.
 
 ### How it’s computed
 
-* Confidence compared against a threshold
-* Additional semantic checks (e.g., “insufficient information”)
+* Semantic analysis of the generated response
+* Detection of insufficiency indicators (e.g., “not enough information in context”)
+* Independent of numeric confidence score
 
 ### What it means
 
+A **refusal** indicates that the system has determined the question
+cannot be answered from the retrieved context.
+
 Refusal is **not a failure**.
 
-It is a **successful safety outcome** when:
-
-* the corpus lacks information
+It is a **correct and safe outcome** when:
+* the corpus lacks required information
 * the question is out of scope
-* hallucination risk is high
+* answering would require hallucination
 
----
 
 ## 🧠 How These Metrics Work Together
 
@@ -338,13 +343,19 @@ Decisions are made **systemically**, not heuristically.
 
 ---
 
-# Refusal vs Confidence (Important Distinction)
+# Answer Type vs Confidence (Important Distinction)
 
-In this system, **confidence measures trustworthiness of the response**, not whether the response contains factual content.
+In this system, **answer intent** and **confidence** are treated as separate concepts.
+
+* **Answer Type** determines *what* the system decided to do:
+  * answer
+  * refuse
+
+* **Confidence** determines *how sure* the system is about that decision.
 
 During retry, it is possible for:
 - confidence to increase
-- while the correct response remains an explicit refusal
+- while the correct response remains a refusal
 
 This occurs when:
 - retrieval quality improves
@@ -353,7 +364,10 @@ This occurs when:
 - but the corpus still lacks the required information
 
 In such cases, the system becomes **more confident that refusal is the correct outcome**.
----
+
+This separation avoids policy ambiguity and reflects how
+production LLM systems handle uncertainty safely.
+
 
 ## ⚙️ Performance & Deployment Notes
 

@@ -8,7 +8,11 @@ from generation.generator import Generator
 
 from evaluation.faithfulness import faithfulness_score
 from evaluation.grounding import grounding_score
-from evaluation.confidence import confidence_score, should_refuse
+from evaluation.confidence import confidence_score
+from evaluation.decision import decide_answer_type
+from evaluation.answer_type import AnswerType
+
+
 
 from feedback.controller import SelfImprovingController
 from memory.store import MemoryStore
@@ -45,20 +49,23 @@ confidence = confidence_score(retrieval_metrics, faithfulness, grounding)
 
 print("\n=== INITIAL ANSWER ===")
 print(answer)
+answer_type = decide_answer_type(answer, confidence)
 
 print("\n=== EVALUATION ===")
 print("Retrieval:", retrieval_metrics)
 print("Faithfulness:", faithfulness)
 print("Grounding:", grounding)
+print("Answer type:", answer_type.value)
 print("Confidence:", confidence)
-print("Refuse:", should_refuse(confidence))
 
 decision = controller.process(
     query=query,
     retrieval_report=retrieval_metrics,
     faithfulness=faithfulness,
-    confidence=confidence
+    confidence=confidence,
+    answer_type=answer_type
 )
+
 
 if decision is None:
     print("\nNo failure detected. No retry needed.")
@@ -108,9 +115,11 @@ controller.store_learning(
 
 print("\n=== IMPROVED ANSWER ===")
 print(improved_answer)
+improved_answer_type = decide_answer_type(improved_answer, improved_confidence)
 
 print("\n=== IMPROVED EVALUATION ===")
 print("Faithfulness:", improved_faithfulness)
 print("Grounding:", improved_grounding)
+print("Answer type:", improved_answer_type.value)
 print("Confidence:", improved_confidence)
-print("Refuse:", should_refuse(improved_confidence))
+
