@@ -135,22 +135,6 @@ self_improving_rag/
 ├── logs/             # ingestion & retrieval logs
 └── main_self_improving.py
 ```
-
----
-
-This is a **very good README already**.
-What’s missing is **one thing only**:
-👉 *crystal-clear, engineer-level definitions of your evaluation metrics* — not slogans.
-
-Below, I’ll give you **clean, precise, production-quality explanations** for **each metric**, written so that:
-
-* a senior engineer understands *exactly* how it works
-* an interviewer cannot poke holes
-* it maps **directly to your implementation**
-* you can **drop it straight into your README**
-
-I’ll also explain **why each metric exists**, **how it’s computed**, and **what it means when it’s high or low**.
-
 ---
 
 # 🔍 Evaluation Metrics
