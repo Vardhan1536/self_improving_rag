@@ -153,13 +153,7 @@ I’ll also explain **why each metric exists**, **how it’s computed**, and **w
 
 ---
 
-# 🔍 Evaluation Metrics — Clear, Precise Definitions (Add This Section)
-
-You should **replace / expand** your current “Metrics Used Instead” section with the following.
-
----
-
-## 📊 Evaluation Metrics 
+# 🔍 Evaluation Metrics
 
 ## 1️⃣ Retrieval Similarity (Auxiliary Signal)
 
