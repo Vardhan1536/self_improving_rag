@@ -159,14 +159,7 @@ You should **replace / expand** your current “Metrics Used Instead” section 
 
 ---
 
-## 📊 Evaluation Metrics (Detailed)
-
-This system does not evaluate answers using *accuracy*.
-Instead, it evaluates **reliability signals** that matter in production RAG systems.
-
-Each metric captures a **different failure mode**.
-
----
+## 📊 Evaluation Metrics 
 
 ## 1️⃣ Retrieval Similarity (Auxiliary Signal)
 
@@ -174,27 +167,10 @@ Each metric captures a **different failure mode**.
 
 The **semantic closeness** between the query and each retrieved chunk in embedding space.
 
-### How it’s computed
-
-* Dense embeddings are generated using a sentence-transformer
-* Cosine similarity is computed between:
-
-  * query embedding
-  * retrieved chunk embeddings
-
 ### What it means
 
 * **High similarity ≠ answerable**
 * Similarity only tells us *“this text looks related”*, not *“this text is sufficient”*
-
-### Why it exists
-
-Similarity is useful for:
-
-* ranking chunks
-* debugging retriever behavior
-
-But **it is never used alone** to trust an answer.
 
 ---
 
@@ -209,10 +185,6 @@ How much of the **query’s intent** is actually covered by the retrieved contex
 * Tokenize the query into key terms
 * Tokenize retrieved chunks
 * Compute the fraction of query terms appearing in retrieved text
-
-[
-\text{Coverage} = \frac{|\text{Query terms} \cap \text{Retrieved terms}|}{|\text{Query terms}|}
-]
 
 ### What it means
 
@@ -229,8 +201,6 @@ Coverage detects **silent failures** where:
 * similarity is high
 * but key aspects of the question are missing
 
-This is one of the **most important RAG diagnostics**.
-
 ---
 
 ## 3️⃣ Redundancy Score (Context Waste)
@@ -244,9 +214,6 @@ How repetitive the retrieved chunks are.
 * Count unique chunk texts
 * Compare against total retrieved chunks
 
-[
-\text{Redundancy} = 1 - \frac{\text{Unique chunks}}{\text{Total chunks}}
-]
 
 ### What it means
 
@@ -263,8 +230,6 @@ High redundancy:
 * reduces answer quality
 * hides missing information
 
-Production systems must optimize **information density**, not just relevance.
-
 ---
 
 ## 4️⃣ Faithfulness Score (Answer ↔ Context Alignment)
@@ -278,10 +243,6 @@ How much of the **generated answer is actually supported** by the retrieved cont
 * Tokenize the generated answer
 * Tokenize the retrieved context
 * Measure fraction of answer tokens appearing in context
-
-[
-\text{Faithfulness} = \frac{|\text{Answer tokens} \cap \text{Context tokens}|}{|\text{Answer tokens}|}
-]
 
 ### What it means
 
@@ -297,8 +258,6 @@ Faithfulness directly detects **hallucination**, even when:
 
 * the answer *sounds correct*
 * the retriever returned something relevant
-
-This metric is **more important than correctness** in RAG.
 
 ---
 
@@ -328,8 +287,6 @@ Grounding separates:
   from
 * *generation failure*
 
-This enables **correct failure attribution**.
-
 ---
 
 ## 6️⃣ Confidence Score (System Trust Estimate)
@@ -346,13 +303,6 @@ A weighted combination of:
 * Faithfulness (answer support)
 * Grounding (evidence quality)
 
-[
-\text{Confidence} =
-0.4 \cdot \text{Coverage} +
-0.3 \cdot \text{Faithfulness} +
-0.3 \cdot \text{Grounding}
-]
-
 ### What it means
 
 | Confidence | System Action  |
@@ -368,8 +318,6 @@ Production systems must:
 * **calibrate trust**
 * not answer everything
 * prefer refusal over hallucination
-
-This score enables **policy-based safety decisions**.
 
 ---
 
